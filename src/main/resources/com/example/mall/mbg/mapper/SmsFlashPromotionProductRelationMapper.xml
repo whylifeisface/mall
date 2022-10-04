@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mall.mbg.mapper.SmsFlashPromotionProductRelationMapper">
+  <resultMap id="BaseResultMap" type="com.example.mall.mbg.model.SmsFlashPromotionProductRelation">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="flash_promotion_id" jdbcType="BIGINT" property="flashPromotionId" />
+    <result column="flash_promotion_session_id" jdbcType="BIGINT" property="flashPromotionSessionId" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="flash_promotion_price" jdbcType="DECIMAL" property="flashPromotionPrice" />
+    <result column="flash_promotion_count" jdbcType="INTEGER" property="flashPromotionCount" />
+    <result column="flash_promotion_limit" jdbcType="INTEGER" property="flashPromotionLimit" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, flash_promotion_id, flash_promotion_session_id, product_id, flash_promotion_price, 
+    flash_promotion_count, flash_promotion_limit, sort
+  </sql>
+  <select id="selectByExample" parameterType="com.example.mall.mbg.model.SmsFlashPromotionProductRelationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sms_flash_promotion_product_relation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sms_flash_promotion_product_relation
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sms_flash_promotion_product_relation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.mall.mbg.model.SmsFlashPromotionProductRelationExample">
+    delete from sms_flash_promotion_product_relation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.mall.mbg.model.SmsFlashPromotionProductRelation">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sms_flash_promotion_product_relation (flash_promotion_id, flash_promotion_session_id, 
+      product_id, flash_promotion_price, flash_promotion_count, 
+      flash_promotion_limit, sort)
+    values (#{flashPromotionId,jdbcType=BIGINT}, #{flashPromotionSessionId,jdbcType=BIGINT}, 
+      #{productId,jdbcType=BIGINT}, #{flashPromotionPrice,jdbcType=DECIMAL}, #{flashPromotionCount,jdbcType=INTEGER}, 
+      #{flashPromotionLimit,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.mall.mbg.model.SmsFlashPromotionProductRelation">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sms_flash_promotion_product_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="flashPromotionId != null">
+        flash_promotion_id,
+      </if>
+      <if test="flashPromotionSessionId != null">
+        flash_promotion_session_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="flashPromotionPrice != null">
+        flash_promotion_price,
+      </if>
+      <if test="flashPromotionCount != null">
+        flash_promotion_count,
+      </if>
+      <if test="flashPromotionLimit != null">
+        flash_promotion_limit,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="flashPromotionId != null">
+        #{flashPromotionId,jdbcType=BIGINT},
+      </if>
+      <if test="flashPromotionSessionId != null">
+        #{flashPromotionSessionId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="flashPromotionPrice != null">
+        #{flashPromotionPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="flashPromotionCount != null">
+        #{flashPromotionCount,jdbcType=INTEGER},
+      </if>
+      <if test="flashPromotionLimit != null">
+        #{flashPromotionLimit,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.mall.mbg.model.SmsFlashPromotionProductRelationExample" resultType="java.lang.Long">
+    select count(*) from sms_flash_promotion_product_relation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <resultMap id="init" type="com.example.mall.mbg.model.SmsFlashPromotionProductRelation" extends="BaseResultMap">
+    <result property="numberCount" column="number_count"/>
+    <association property="smsFlashPromotionSession">
+      <result column="id" property="id"/>
+      <result column="create_time" property="createTime"/>
+      <result column="end_time" property="endTime"/>
+      <result column="name" property="name"/>
+      <result column="create_time" property="createTime"/>
+    </association>
+  </resultMap>
+    <select id="init" resultMap="init">
+      SELECT count(flash_promotion_session_id) as number_count , sss.id,sss.create_time, sss.end_time,sss.`name` FROM `sms_flash_promotion_product_relation`  spp
+      JOIN sms_flash_promotion_session sss on spp.flash_promotion_session_id = sss.id
+      WHERE sss.`status` = 1
+      GROUP BY flash_promotion_session_id
+    </select>
+  <resultMap id="joinPmsProduct" type="com.example.mall.mbg.model.SmsFlashPromotionProductRelation" extends="BaseResultMap">
+    <association property="pmsProduct">
+      <result property="name" column="name"/>
+      <result property="price" column="price"/>
+      <result property="productSn" column="product_sn"/>
+      <result property="stock" column="stock"/>
+      <result property="sort" column="sort"/>
+    </association>
+  </resultMap>
+  <select id="joinPmsProduct" resultMap="joinPmsProduct">
+    SELECT ssp.id,ssp.flash_promotion_count,ssp.flash_promotion_price,ssp.flash_promotion_limit,
+           pp.name,pp.product_sn,pp.price,pp.stock,pp.sort
+    FROM `sms_flash_promotion_product_relation` ssp
+           join pms_product pp on ssp.product_id = pp.id
+    where ssp.flash_promotion_session_id = #{id}
+  </select>
+  <resultMap id="twice" type="com.example.mall.mbg.model.SmsFlashPromotionProductRelation" extends="BaseResultMap">
+    <association property="pmsProduct">
+      <result property="id" column="id"/>
+      <result property="name" column="name"/>
+      <result property="price" column="price"/>
+      <result property="productSn" column="product_sn"/>
+    </association>
+  </resultMap>
+  <select id="twice" resultMap="twice">
+    SELECT pp.id , pp.name,pp.product_sn,pp.price  FROM `sms_flash_promotion_product_relation` sfr
+    join pms_product pp on  pp.id = sfr.product_id
+    GROUP BY sfr.product_id
+
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sms_flash_promotion_product_relation
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.flashPromotionId != null">
+        flash_promotion_id = #{record.flashPromotionId,jdbcType=BIGINT},
+      </if>
+      <if test="record.flashPromotionSessionId != null">
+        flash_promotion_session_id = #{record.flashPromotionSessionId,jdbcType=BIGINT},
+      </if>
+      <if test="record.productId != null">
+        product_id = #{record.productId,jdbcType=BIGINT},
+      </if>
+      <if test="record.flashPromotionPrice != null">
+        flash_promotion_price = #{record.flashPromotionPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.flashPromotionCount != null">
+        flash_promotion_count = #{record.flashPromotionCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.flashPromotionLimit != null">
+        flash_promotion_limit = #{record.flashPromotionLimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sms_flash_promotion_product_relation
+    set id = #{record.id,jdbcType=BIGINT},
+      flash_promotion_id = #{record.flashPromotionId,jdbcType=BIGINT},
+      flash_promotion_session_id = #{record.flashPromotionSessionId,jdbcType=BIGINT},
+      product_id = #{record.productId,jdbcType=BIGINT},
+      flash_promotion_price = #{record.flashPromotionPrice,jdbcType=DECIMAL},
+      flash_promotion_count = #{record.flashPromotionCount,jdbcType=INTEGER},
+      flash_promotion_limit = #{record.flashPromotionLimit,jdbcType=INTEGER},
+      sort = #{record.sort,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.mall.mbg.model.SmsFlashPromotionProductRelation">
+    update sms_flash_promotion_product_relation
+    <set>
+      <if test="flashPromotionId != null">
+        flash_promotion_id = #{flashPromotionId,jdbcType=BIGINT},
+      </if>
+      <if test="flashPromotionSessionId != null">
+        flash_promotion_session_id = #{flashPromotionSessionId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="flashPromotionPrice != null">
+        flash_promotion_price = #{flashPromotionPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="flashPromotionCount != null">
+        flash_promotion_count = #{flashPromotionCount,jdbcType=INTEGER},
+      </if>
+      <if test="flashPromotionLimit != null">
+        flash_promotion_limit = #{flashPromotionLimit,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.mall.mbg.model.SmsFlashPromotionProductRelation">
+    update sms_flash_promotion_product_relation
+    set flash_promotion_id = #{flashPromotionId,jdbcType=BIGINT},
+      flash_promotion_session_id = #{flashPromotionSessionId,jdbcType=BIGINT},
+      product_id = #{productId,jdbcType=BIGINT},
+      flash_promotion_price = #{flashPromotionPrice,jdbcType=DECIMAL},
+      flash_promotion_count = #{flashPromotionCount,jdbcType=INTEGER},
+      flash_promotion_limit = #{flashPromotionLimit,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
